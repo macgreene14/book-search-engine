@@ -1,34 +1,35 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-//   type School {
-//     _id: ID
-//     name: String
-//     location: String
-//     studentCount: Int
-//     classes: [Class]
-//   }
+  type User {
+    _id: ID
+    username: String
+    email: String
+    password: String
+    savedBooks: [Book] 
+    bookCount: Int
+  }
 
-//   type Class {
-//     _id: ID
-//     name: String
-//     building: String
-//     creditHours: Int
-//     professor: Professor
-//   }
-
-//   type Professor {
-//     _id: ID
-//     name: String
-//     officeHours: String
-//     officeLocation: String
-//     studentScore: Float
-//   }
+  type Book {
+    authors: [String]
+    description: String
+    bookId: String
+    image: String
+    link: String
+    title: String
+  }  
 
   type Query {
-    // schools: [School]
-    // classes: [Class]
-    // professors: [Professor]
+    users: [User] 
+    books: [Book]
+  }
+
+  type Mutations {
+    getUser(username: String!, email: String!, _id: ID): User
+    addUser(username: String!, email: String!, password: String!): User
+    loginUser(username: String!, email: String!, password: String!): User
+    saveBook(_id: ID!, bookId: String!): User // todo ? How to modify book nested model with graphql
+    deleteBook(_id: ID!, bookId: String!): User
   }
 `;
 
